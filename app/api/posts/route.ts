@@ -1,6 +1,6 @@
 import  clientPromise  from '@lib/mongo/index'
 
-export const GET = async () => {
+export const GET = async () => { //the GET name can't be changed for AJAX request
     try {
         const posts = await clientPromise()
 
