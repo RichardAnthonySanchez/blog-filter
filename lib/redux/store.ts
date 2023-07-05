@@ -14,7 +14,6 @@ import {
 /* Instruments */
 import { reducer } from './rootReducer'
 import { middleware } from './middleware'
-import postsReducer from './slices/postsSlice/postsSlice'
 
 const configreStoreDefaultOptions: ConfigureStoreOptions = { reducer }
 
@@ -27,9 +26,8 @@ export const makeReduxStore = (
 }
 
 export const reduxStore = configureStore({
-  reducer: {
-    posts: postsReducer,
-  },
+reducer,
+devTools: true,
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(middleware)
   },

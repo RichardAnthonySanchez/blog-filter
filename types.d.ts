@@ -1,5 +1,5 @@
 type Post = {
-    'id': number,
+    '_id': number,
     'title': string,
     'category': string,
     'author': string,
