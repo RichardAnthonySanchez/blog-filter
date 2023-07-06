@@ -10,6 +10,7 @@ import {
   useDispatch,
   postsAsync,
 } from '@/lib/redux'
+import Link from "next/link"
 
 import { selectAllPosts, getPostsStatus, getPostsError } from '@/lib/redux/slices/postsSlice/selectors' 
 
@@ -33,15 +34,17 @@ export default function PostsList() {
     } else if (postsStatus === 'succeeded') {
         content = 
         <ul className='card'>
-        {data.map((post) => (
-          <li key={post._id}>
-            {post.title}
-            <ul>
-              <li>{post.author}</li>
-              <li>{post.category}</li>
-            </ul>
-            </li>
-        ))}
+          {data.map((post) => (
+            <li key={post._id}>
+                <Link href={post.link}>
+                  {post.title}
+                  <ul>
+                    <li>{post.author}</li>
+                    <li>{post.category}</li>
+                  </ul>
+                </Link>
+              </li>
+          ))}
        </ul>
     } else if (postsStatus === 'failed') {
         content = <p>{error}</p>;
