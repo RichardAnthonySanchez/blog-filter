@@ -32,9 +32,15 @@ export default function PostsList() {
         content = <p>"Loading..."</p>;
     } else if (postsStatus === 'succeeded') {
         content = 
-        <ul>
+        <ul className='card'>
         {data.map((post) => (
-          <li key={post._id}>{post.title}</li>
+          <li key={post._id}>
+            {post.title}
+            <ul>
+              <li>{post.author}</li>
+              <li>{post.category}</li>
+            </ul>
+            </li>
         ))}
        </ul>
     } else if (postsStatus === 'failed') {
