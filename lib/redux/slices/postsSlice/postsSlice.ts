@@ -23,7 +23,42 @@ export const postsSlice = createSlice({
         }),
       }
     },
+    sortPostsById: (state) => {
+      const sortedPosts = [...state.posts].sort((a, b) => {
+        if (a._id < b._id) {
+          return -1;
+        }
+        if (a._id > b._id) {
+          return 1;
+        }
+        return 0;
+      });
+    
+      return {
+        ...state,
+        posts: sortedPosts,
+      };
+    },
+    sortPostsByTitle: (state) => {
+      const sortedPosts = [...state.posts].sort((a, b) => {
+        return a.title.localeCompare(b.title);
+      });
+    
+      return {
+        ...state,
+        posts: sortedPosts,
+      };
+    },
+    reversePosts: (state) => {
+      const reversedPosts = [...state.posts].reverse();
+    
+      return {
+        ...state,
+        posts: reversedPosts,
+      };
+    },    
   },
+  
   
   extraReducers(builder) {
     builder
@@ -48,6 +83,6 @@ export interface PostsSliceState {
   error?: string | null;
 }
 
-export const { filterPosts } = postsSlice.actions;
+export const { filterPosts, sortPostsById, sortPostsByTitle, reversePosts } = postsSlice.actions;
 
 export default postsSlice.reducer;

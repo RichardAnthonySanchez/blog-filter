@@ -5,6 +5,9 @@ import React, { useEffect, useState } from 'react'
 
 /* Instruments */
 import {
+  sortPostsByTitle,
+  sortPostsById,
+  reversePosts,
   filterPosts,
   useSelector,
   useDispatch,
@@ -17,6 +20,8 @@ import { selectAllPosts, getPostsStatus, getPostsError } from '@/lib/redux/slice
 export default function PostsList() {
   const dispatch = useDispatch()
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortById, setSortById] = useState(false);
+  const [sortByTitle, setSortByTitle] = useState(false);
 
   const data = useSelector(selectAllPosts)
   const postsStatus = useSelector(getPostsStatus)
@@ -73,10 +78,34 @@ export default function PostsList() {
       </div>
     </>
 
+  const handleSortById = () => {
+    setSortById(!sortById);
+    dispatch(sortPostsById());
+    if (!sortById) {
+      dispatch(reversePosts());
+    }
+  };
+
+  const handleSortByTitle = () => {
+    setSortByTitle(!sortByTitle);
+    dispatch(sortPostsByTitle());
+    if (!sortByTitle) {
+      dispatch(reversePosts());
+    }
+  };
+
   return (
     <>
       <h2>Blog Browser</h2>
       {search}
+      <div>
+        <button onClick={handleSortById}>
+          Toggle Sort by ID ({sortById ? 'Descending' : 'Ascending'})
+        </button>
+        <button onClick={handleSortByTitle}>
+          Toggle Sort by Title ({sortByTitle ? 'Descending' : 'Ascending'})
+        </button>
+      </div>
       {content}
     </>
   )
