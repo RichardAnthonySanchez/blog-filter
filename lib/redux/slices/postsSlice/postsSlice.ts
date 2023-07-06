@@ -12,7 +12,18 @@ const initialState: PostsSliceState = {
 export const postsSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {},
+  reducers: {
+    filterPosts: (state, action) => {
+      const searchTerm = action.payload.toLowerCase();
+      return {
+          ...state,
+          posts: state.posts.filter((post) => {
+          const title = post.title.toLowerCase();
+          return title.includes(searchTerm)
+        }),
+      }
+    },
+  },
   
   extraReducers(builder) {
     builder
@@ -36,5 +47,7 @@ export interface PostsSliceState {
   status: 'idle' | 'succeeded' |'loading'| 'failed';
   error?: string | null;
 }
+
+export const { filterPosts } = postsSlice.actions;
 
 export default postsSlice.reducer;

@@ -1,11 +1,11 @@
 'use client'
 
 /* Core */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 /* Instruments */
 import {
-  postsSlice,
+  filterPosts,
   useSelector,
   useDispatch,
   postsAsync,
@@ -16,6 +16,7 @@ import { selectAllPosts, getPostsStatus, getPostsError } from '@/lib/redux/slice
 
 export default function PostsList() {
   const dispatch = useDispatch()
+  const [searchTerm, setSearchTerm] = useState('');
 
   const data = useSelector(selectAllPosts)
   const postsStatus = useSelector(getPostsStatus)
@@ -27,6 +28,10 @@ export default function PostsList() {
         dispatch(postsAsync())
       }
     }, [postsStatus, dispatch])
+
+    const handleSearch = () => {
+      dispatch(filterPosts(searchTerm));
+    };
 
     let content;
     if (postsStatus === 'loading') {
@@ -50,9 +55,23 @@ export default function PostsList() {
         content = <p>{error}</p>;
     }
 
+    let search = 
+    <>
+        <div>
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button onClick={handleSearch}>Search</button>
+      </div>
+    </>
+
   return (
     <>
       <h2>Blog Browser</h2>
+      {search}
       {content}
     </>
   )
