@@ -29,9 +29,15 @@ export default function PostsList() {
       }
     }, [postsStatus, dispatch])
 
-    const handleSearch = () => {
-      dispatch(filterPosts(searchTerm));
-    };
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const searchTerm = e.target.value;
+      setSearchTerm(searchTerm);
+      if (searchTerm === '') {
+        dispatch(postsAsync());
+      } else {
+        dispatch(filterPosts(searchTerm));
+      }
+    }
 
     let content;
     if (postsStatus === 'loading') {
@@ -58,13 +64,12 @@ export default function PostsList() {
     let search = 
     <>
         <div>
-          <input
-            type="text"
-            placeholder="Search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button onClick={handleSearch}>Search</button>
+        <input
+        type="text"
+        placeholder="Search"
+        value={searchTerm}
+        onChange={handleSearch}
+      />
       </div>
     </>
 
