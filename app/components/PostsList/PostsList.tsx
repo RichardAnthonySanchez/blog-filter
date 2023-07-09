@@ -116,10 +116,12 @@ export default function PostsList() {
 
   return (
     <>
-      <h2 className={montserrat.className}>Blog Archive</h2>
-      {buttons}
-      {search}
-      {content}
+      <div className='header-container'>
+        <h2 className={montserrat.className}>Blog Archive</h2>
+        {buttons}
+        {search}
+      </div>
+       {content} 
     </>
   )
 }
