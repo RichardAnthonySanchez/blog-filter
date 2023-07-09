@@ -54,7 +54,7 @@ export default function PostsList() {
         content = <p>"Loading..."</p>;
     } else if (postsStatus === 'succeeded') {
         content = 
-        <ul className='card'>
+        <ul className='cards-container'>
           {data.map((post) => (
             <li key={post._id} className={montserrat.className}>
                 <Link href={post.link}>
