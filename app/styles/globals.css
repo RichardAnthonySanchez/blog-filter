@@ -1,9 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Istok+Web&display=swap');
+
+
 html,
 body {
   min-height: 100vh;
   padding: 0;
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: 'Istok Web', sans-serif;
+  color: #404041;
+  line-height: 1.7rem;
 }
 
 a {
@@ -13,4 +18,82 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  font-weight: bold;
+  color: #ffff;
+  background-color: #2eb4ef;
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  border-radius: 30px;
+}
+
+button {
+  background-color: #f6931e;
+  border: none;
+  color: #404041;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c7cf1f;
+}
+
+h2 {
+  color: #fff;
+  background-color: #c7cf1f;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.subtext {
+  font-family: 'Istok Web', sans-serif;
+  font-weight: 400;
+}
+
+.card {
+  padding: 2rem;
+}
+
+input{
+  margin-left: 1rem;
+  background-color: #f6931e;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #404041;
+}
+
+input[type=text]:focus {
+  outline: none;
+}
+
+.search-container {
+  background-color: #f6931e;
+  padding: .5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 5px;
+  margin-top: 2rem;
+}
+
+.search {
+  display: flex;
+  height: 2rem;
+  align-items: center;
 }

@@ -13,7 +13,12 @@ import {
   useDispatch,
   postsAsync,
 } from '@/lib/redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch, faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
 import Link from "next/link"
+import { Montserrat } from 'next/font/google'
+
+const montserrat = Montserrat({ subsets: ['latin'] })
 
 import { selectAllPosts, getPostsStatus, getPostsError } from '@/lib/redux/slices/postsSlice/selectors' 
 
@@ -51,12 +56,12 @@ export default function PostsList() {
         content = 
         <ul className='card'>
           {data.map((post) => (
-            <li key={post._id}>
+            <li key={post._id} className={montserrat.className}>
                 <Link href={post.link}>
                   {post.title}
                   <ul>
-                    <li>{post.author}</li>
-                    <li>{post.category}</li>
+                    <li className='subtext'>{post.author}</li>
+                    <li className='subtext'>{post.category}</li>
                   </ul>
                 </Link>
               </li>
@@ -67,8 +72,9 @@ export default function PostsList() {
     }
 
     let search = 
-    <>
-        <div>
+    <div className='search-container'>
+        <div className='search'>
+        <FontAwesomeIcon icon={faSearch} />
         <input
         type="text"
         placeholder="Search"
@@ -76,7 +82,9 @@ export default function PostsList() {
         onChange={handleSearch}
       />
       </div>
-    </>
+    </div>
+
+
 
   const handleSortById = () => {
     setSortById(!sortById);
@@ -94,18 +102,23 @@ export default function PostsList() {
     }
   };
 
+  let buttons =
+  <>
+    <div>
+      <button onClick={handleSortById}>
+        Date {sortById ? <FontAwesomeIcon icon={faSortDown}/> : <FontAwesomeIcon icon={faSortUp}/>}
+      </button>
+      <button onClick={handleSortByTitle}>
+        Title {sortByTitle ? <FontAwesomeIcon icon={faSortDown}/> : <FontAwesomeIcon icon={faSortUp}/>}
+      </button>
+    </div>
+  </>
+
   return (
     <>
-      <h2>Blog Browser</h2>
+      <h2 className={montserrat.className}>Blog Archive</h2>
+      {buttons}
       {search}
-      <div>
-        <button onClick={handleSortById}>
-          Toggle Sort by ID ({sortById ? 'Descending' : 'Ascending'})
-        </button>
-        <button onClick={handleSortByTitle}>
-          Toggle Sort by Title ({sortByTitle ? 'Descending' : 'Ascending'})
-        </button>
-      </div>
       {content}
     </>
   )
